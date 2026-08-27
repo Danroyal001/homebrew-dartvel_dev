@@ -28,8 +28,15 @@ class DartvelDev < Formula
     # Installed through pub rather than compiled here, so `brew upgrade` and
     # `dart pub global activate` cannot end up disagreeing about which build is
     # current.
+    # dartvel_cli, not dartvel_dev. The umbrella depends on the Flutter SDK,
+    # and pub refuses to run a global executable from a package that does:
+    # "dartvel_dev as globally activated requires the Flutter SDK, which is
+    # unsupported for global executables". It activates and then cannot run.
+    #
+    # dartvel_dev is what an application depends on; dartvel_cli is what you
+    # install to get the command, and it is pure Dart.
     ENV["PUB_CACHE"] = buildpath/"pub-cache"
-    system "dart", "pub", "global", "activate", "dartvel_dev", version.to_s
+    system "dart", "pub", "global", "activate", "dartvel_cli", version.to_s
 
     snapshot = buildpath/"pub-cache/bin/dartvel"
     libexec.install Dir[buildpath/"pub-cache/*"]
