@@ -15,10 +15,9 @@ you type does not.
 
 ## What it installs
 
-Dartvel is a Dart toolchain, so this tap does not vendor a compiled binary. The
-formula installs the CLI through `dart pub global activate` into its own cellar,
-which keeps Homebrew and pub from disagreeing about which build is current.
+A prebuilt, self-contained `dartvel` binary. The CLI is a Dart program, but
+`dart build cli` links the Dart runtime and the Rust server library into one
+executable, so the formula has no dependencies at all -- no Dart, no Flutter.
 
-Dart is the only dependency. Flutter is not, because the CLI needs the Dart SDK
-alone — and building against Flutter would pull several gigabytes onto machines
-that already have it.
+Building an application still needs Flutter, for whichever target you are
+building. Running the CLI does not.

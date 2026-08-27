@@ -1,58 +1,56 @@
 # Dartvel — a batteries-included, AI-native full-stack platform built around
 # Flutter.
 #
-# This formula installs the `dartvel` command. The formula, the pub.dev package
-# and the npm package are all named `dartvel_dev`; the command is `dartvel`.
-# They differ because `dartvel` was taken on pub.dev on 2026-08-06 by an
-# unrelated package, so the published identifier carries the suffix and the
-# thing you type does not.
+# The formula, the pub.dev package and the npm package are all named
+# `dartvel_dev`; the command is `dartvel`. They differ because `dartvel` was
+# taken on pub.dev on 2026-08-06 by an unrelated package, so the published
+# identifier carries the suffix and the thing you type does not.
 #
-# Dartvel is a Dart toolchain, so this does not vendor a binary. Shipping a
-# compiled copy here would mean maintaining a second build that drifts from the
-# one `dart pub global activate` installs, and it would need a release per
-# platform before the tap could exist at all.
+# This installs a prebuilt binary rather than building from source. The CLI is
+# a Dart program, but `dart build cli` links the Dart runtime and the Rust
+# server library into a single executable, so there is nothing to depend on at
+# run time -- no Dart, no Flutter, no cellar full of pub cache.
+#
+# Building an application still needs Flutter, for whichever target you are
+# building. Running the CLI does not, which is why this formula has no
+# dependencies at all.
 class DartvelDev < Formula
   desc "Batteries-included, AI-native full-stack application platform for Flutter"
   homepage "https://dartvel.dev"
-  url "https://github.com/Danroyal001/dartvel_dev/archive/refs/tags/v0.2.1.tar.gz"
   version "0.2.1"
   license "MIT"
-  head "https://github.com/Danroyal001/dartvel_dev.git", branch: "main"
 
-  # Dart rather than Flutter: the CLI itself needs only the Dart SDK, and
-  # depending on Flutter here would pull several gigabytes onto machines that
-  # only ever run `dartvel build web` against an existing install.
-  depends_on "dart-lang/dart/dart"
+  on_macos do
+    on_arm do
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.2.1/dartvel-darwin-arm64"
+      sha256 :no_check
+    end
+    on_intel do
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.2.1/dartvel-darwin-amd64"
+      sha256 :no_check
+    end
+  end
+
+  on_linux do
+    on_arm do
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.2.1/dartvel-linux-arm64"
+      sha256 :no_check
+    end
+    on_intel do
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.2.1/dartvel-linux-amd64"
+      sha256 :no_check
+    end
+  end
 
   def install
-    # Installed through pub rather than compiled here, so `brew upgrade` and
-    # `dart pub global activate` cannot end up disagreeing about which build is
-    # current.
-    # dartvel_cli, not dartvel_dev. The umbrella depends on the Flutter SDK,
-    # and pub refuses to run a global executable from a package that does:
-    # "dartvel_dev as globally activated requires the Flutter SDK, which is
-    # unsupported for global executables". It activates and then cannot run.
-    #
-    # dartvel_dev is what an application depends on; dartvel_cli is what you
-    # install to get the command, and it is pure Dart.
-    ENV["PUB_CACHE"] = buildpath/"pub-cache"
-    system "dart", "pub", "global", "activate", "dartvel_cli", version.to_s
-
-    snapshot = buildpath/"pub-cache/bin/dartvel"
-    libexec.install Dir[buildpath/"pub-cache/*"]
-    (bin/"dartvel").write <<~SHELL
-      #!/bin/bash
-      export PUB_CACHE="#{libexec}"
-      exec "#{libexec}/bin/dartvel" "$@"
-    SHELL
-    chmod 0755, bin/"dartvel"
-    odie "pub did not produce a dartvel executable" unless snapshot.exist?
+    # The download arrives under the asset name; the command is `dartvel`.
+    bin.install Dir["dartvel-*"].first => "dartvel"
   end
 
   test do
-    # Asserts the command runs and reports a version, not merely that a file
-    # landed in bin. A formula that only checks for the file passes when the
-    # wrapper cannot find its pub cache.
-    assert_match version.to_s, shell_output("#{bin}/dartvel --version")
+    # Asserts the binary runs and reports a version, not that a file landed in
+    # bin. A formula checking only for the file passes when the binary cannot
+    # start at all.
+    assert_match "Dartvel CLI", shell_output("#{bin}/dartvel --version")
   end
 end
