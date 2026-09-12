@@ -21,28 +21,28 @@
 class DartvelDev < Formula
   desc "Batteries-included, AI-native full-stack application platform for Flutter"
   homepage "https://dartvel.dev"
-  version "0.4.1"
+  version "0.5.0"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.4.1/dartvel-darwin-arm64"
-      sha256 "154737724c273ddd01fb97ce1daa58f3be7a2348f513c7c1afbccde5fc7afa9c"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.5.0/dartvel-darwin-arm64"
+      sha256 "559cefcc6c5b83cebf0297656bd47e9606210e95ad679a0f54172a616f860f29"
     end
     on_intel do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.4.1/dartvel-darwin-amd64"
-      sha256 "9967690966811e9b45897ac0a6d0a402abf69b5950e6b67f279983690ab8af25"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.5.0/dartvel-darwin-amd64"
+      sha256 "85836eeb7997121103ae96dd831e4b41fd8585bebd085182ab35fc798ed5d082"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.4.1/dartvel-linux-arm64"
-      sha256 "cef42ce74da3996c0651450eaffd313c0fbae2444e59c911d26b8c5535ce6d6a"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.5.0/dartvel-linux-arm64"
+      sha256 "7dbb0c0a195a196fd0ee7e75146e3fa5c84eca26e075ff942e00091dbcb97c8f"
     end
     on_intel do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.4.1/dartvel-linux-amd64"
-      sha256 "04bba97f62ea4d13b6e47dbd71dd0fd1ede76d31acdc8eb443e0e78e63227d8d"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.5.0/dartvel-linux-amd64"
+      sha256 "81099130045728fe62459f2317b5da508fe54199183282c334d835a797a7cbdf"
     end
   end
 
