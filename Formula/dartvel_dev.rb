@@ -21,7 +21,7 @@
 class DartvelDev < Formula
   desc "Batteries-included, AI-native full-stack application platform for Flutter"
   homepage "https://dartvel.dev"
-  version "0.13.34"
+  version "0.13.35"
   license "MIT"
 
   # The release workflow that built macOS binaries cannot run now (GitHub Actions
@@ -31,12 +31,12 @@ class DartvelDev < Formula
 
   on_linux do
     on_arm do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.34/dartvel-linux-arm64"
-      sha256 "5111a99fc62262586d6146f2349bf890bbce3fa0964d5b1872c8441625491dbc"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.35/dartvel-linux-arm64"
+      sha256 "7832b7759d1482f134628b1a78d37d7a508760ebccbf7a888a0a4b2e8d6de6d8"
     end
     on_intel do
-      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.34/dartvel-linux-amd64"
-      sha256 "13edf4612d19482aa2340cbd913198e9093952ce43fe43337b1cae59561da856"
+      url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.35/dartvel-linux-amd64"
+      sha256 "c4ded0418d7d048c383da2ceced2842c3624d3d70203f02ba354eb79b47fd15c"
     end
   end
 
