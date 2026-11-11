@@ -32,11 +32,11 @@ class DartvelDev < Formula
   on_linux do
     on_arm do
       url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.40/dartvel-linux-arm64"
-      sha256 "b67b475bf09e4c74b7b8303c9d8bbe43f820a482efa38ab6627d87efa6ff6246"
+      sha256 "a79b6a928a81f5c127efbd38e8510989c2d228639ff35ffd7fca56e86155a607"
     end
     on_intel do
       url "https://github.com/Danroyal001/dartvel_dev/releases/download/v0.13.40/dartvel-linux-amd64"
-      sha256 "a79b6a928a81f5c127efbd38e8510989c2d228639ff35ffd7fca56e86155a607"
+      sha256 "b67b475bf09e4c74b7b8303c9d8bbe43f820a482efa38ab6627d87efa6ff6246"
     end
   end
 
